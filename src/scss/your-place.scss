@@ -1,0 +1,55 @@
+// Import path variables. The SASS compiler will resolve the paths import based on the variables in GruntFile.js
+@import 'paths';
+
+// Place base variable overrides here prior to importing the base partial
+
+// Import basic variables that will be used across sub projects
+@import 'partials/base';
+
+$color_text_default: rgb(215, 207, 199);
+
+// Begin SCSS rules here
+// .some-selector {
+//     background: somevalue;
+// }
+
+// Remove padding from left and right of the container-fluid class
+.container-fluid {
+    padding: 0;
+}
+
+#your-place {
+    background: url($path_img_base + '/background.jpg');
+    background-size: cover;
+    background-position: top right;
+
+    display: block;
+    min-height: 900px;
+    padding: 6rem 10rem;
+    color: $color_text_default;
+
+    .subtitle {
+        font-size: 2rem;
+    }
+}
+
+h1 {
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+p {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.title-box {
+    display: inline-block;
+    border: 2px solid #d7cfc7;
+    padding: 0.5em 1em;
+}
