@@ -40,8 +40,9 @@ module.exports = function(grunt) {
                     loadPath: [
                         '<%= project.theme.bootstrap %>/assets/stylesheets',
                         '<%= project.src.scss %>',
+                        '<%= project.src.scss %>/dev',
                         '<%= project.theme.scss %>/dev',
-                        '<%= project.src.scss %>/dev'
+                        '<%= project.theme.scss %>'
                     ]
                 },
                 files: [
@@ -62,8 +63,9 @@ module.exports = function(grunt) {
                     loadPath: [
                         '<%= project.theme.bootstrap %>/assets/stylesheets',
                         '<%= project.src.scss %>',
-                        '<%= project.theme.scss %>/dev',
-                        '<%= project.src.scss %>/dev'
+                        '<%= project.src.scss %>/dist',
+                        '<%= project.theme.scss %>/dist',
+                        '<%= project.theme.scss %>'
                     ]
                 },
                 files: [
@@ -130,12 +132,32 @@ module.exports = function(grunt) {
         /**
         * Combine multiple JS source files into one.
         */
+        // Not used currently, but kept around in case we want to consolidate the various landing JS files
         concat: {
             js: {
                 files: {
                     '<%= project.dist.js %>/<%= pkg.name %>.js': '<%= project.src.js %>/**/*.js',
                     '<%= project.dev.js %>/<%= pkg.name %>.js': '<%= project.src.js %>/**/*.js',
                 }
+            }
+        },
+        // Instead we just copy over the files over to the distribution and development directories
+        copy: {
+            main: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['<%= project.src.js %>/**/*.js'],
+                        dest: '<%= project.dev.js %>/'
+                    },
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['<%= project.src.js %>/**/*.js'],
+                        dest: '<%= project.dist.js %>/'
+                    }
+                ]
             }
         },
         /**
@@ -221,6 +243,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     /**
     * Default task
@@ -230,5 +253,5 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'connect', 'watch'
     ]);
-    grunt.registerTask('preflight', [ 'concat', 'uglify', 'sass', 'postcss' ]);
+    grunt.registerTask('preflight', [ 'copy', 'uglify', 'sass', 'postcss' ]);
 }
