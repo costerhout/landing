@@ -6,7 +6,24 @@
 // Import basic variables that will be used across sub projects
 @import 'partials/base';
 
-$color_text_default: rgb(215, 207, 199);
+// Load up our development font
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+
+// $color_text_default: rgb(215, 207, 199);
+$color_text_default: #fdfffc;
+// $color_link: #4433b7;
+$color_link: #4c7104;
+$color_link_bg: #ffda05;
+$color_link_hover_bg: #fcc001;
+$color_form_button: $color_link;
+$color_form_button_bg: $color_link_bg;
+$color_form_button_hover_bg: $color_link_hover_bg;
+$font_family: 'Open Sans', sans-serif;
+$font_weight_light: 300;
+$font_weight_normal: 400;
+$font_weight_bold: 600;
+$padding_medium:  0.4em 0.7em;
+$padding_heavy: 2em 2.2em;
 
 // Begin SCSS rules here
 // .some-selector {
@@ -18,38 +35,201 @@ $color_text_default: rgb(215, 207, 199);
     padding: 0;
 }
 
-#your-place {
-    background: url($path_img_base + '/background.jpg');
-    background-size: cover;
-    background-position: top right;
-
-    display: block;
-    min-height: 900px;
-    padding: 6rem 10rem;
-    color: $color_text_default;
-
-    .subtitle {
-        font-size: 2rem;
-    }
+strong {
+    font-weight: $font_weight_bold;
 }
 
 h1 {
-    font-size: 6rem;
+    font-size: 3.6rem;
+    font-weight: $font_weight_bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    text-shadow: 0.03em 0.03em 2px rgba(0,0,0,0.4);
 }
 
 h2 {
-    font-size: 3rem;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
 }
 
 p {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.64;
+    font-weight: $font_weight_light;
+}
+
+a {
+    color: $color_link;
+    background-color: $color_link_bg;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    font-weight: $font_weight_normal;
+
+    &:visited {
+        color: $color_link;
+    }
+    &:hover {
+        background-color: $color_link_hover_bg;
+        color: lighten($color_link, 8%);
+        text-decoration: none;
+    }
+    &:active {
+        color: lighten($color_link, 13%);
+    }
+}
+
+button {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#your-place-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+#your-place {
+    display: block;
+
+    // Set the background image and tell it to cover the entire div, locking the
+    // top right corner in place
+    background: url($path_img_base + '/your-place-background.jpg');
+    background-size: cover;
+    background-position: top right;
+
+    padding-top: 2rem;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 3rem;
+    color: $color_text_default;
+
+    font-family: $font_family;
+    font-weight: $font_weight_normal;
+}
+
+#your-place-logo {
+    max-width: 250px;
+    width: 100%;
+}
+
+.sm-align-center {
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 2rem;
+}
+
+.subtitle-large {
+    font-size: 3rem;
+}
+
+.btn-flat {
+    border-radius: 0;
+    width: 100%;
+    background-color: $color_form_button_bg;
+    color: $color_form_button;
+
+    &:hover {
+        color: $color_link;
+        background-color: $color_form_button_hover_bg;
+    }
+}
+
+.link {
+    cursor: pointer;
 }
 
 .title-box {
     display: inline-block;
-    border: 2px solid #d7cfc7;
-    padding: 0.5em 1em;
+    border: 2px solid $color_text_default;
+    padding: $padding_medium;
+}
+
+.padding-heavy {
+    padding: $padding_heavy;
+}
+
+.row {
+    margin-top: 1em;
+}
+
+.align-middle-parent {
+    position: relative;
+}
+
+.align-middle {
+    transform: translate(0, -50%);
+}
+
+.form-control {
+    border-radius: 0px;
+}
+
+@media screen and (min-width: $screen-xs-min) {
+    // For anything other than a really small screen lock the background div in place
+    #your-place {
+        position: absolute;
+        min-height: 1250px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@media screen and (min-width: $screen-sm-min) {
+    #your-place {
+        padding: 6rem 10rem;
+
+        .subtitle {
+            font-size: 2.2rem;
+        }
+
+        font-size: 1.6rem;
+    }
+
+    .sm-align-center {
+        text-align: initial;
+    }
+
+    #your-place-logo {
+        width: 250px;
+    }
+
+    button {
+        margin: initial;
+    }
+
+    h1 {
+        font-size: 7.2rem;
+        font-weight: $font_weight_bold;
+    }
+
+    h2 {
+        font-size: 3rem;
+        letter-spacing: 0.15rem;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    p {
+        margin-top: 2rem;
+        margin-bottom: 2.5rem;
+        font-weight: $font_weight_light;
+    }
+
+    a {
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+    }
+
+    .row {
+        margin-top: 2rem;
+    }
 }
