@@ -1,0 +1,174 @@
+// Import path variables. The SASS compiler will resolve the paths import based on the variables in GruntFile.js
+@import 'paths';
+
+// Place base variable overrides here prior to importing the base partial
+
+// Import basic variables that will be used across sub projects
+@import 'partials/base';
+
+// Load up our development font
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
+
+// $color_text_default: rgb(215, 207, 199);
+$color_text_default: #0a1d01;
+// $color_link: #4433b7;
+$color_link: #4c7104;
+$color_link_bg: #ffda05;
+$color_link_hover_bg: #fcc001;
+$color_form_button: $color_link;
+$color_form_button_bg: $color_link_bg;
+$color_form_button_hover_bg: $color_link_hover_bg;
+$color_row_odd: #f0f0f0;
+$color_row_even: #e5e7d4;
+$font_family: 'Open Sans', sans-serif;
+$font_family_title_change: 'Shadows Into Light Two', 'Brush Script MT', 'Papyrus', sans-serif;
+$font_size_section_title: 2.8rem;
+$font_weight_light: 300;
+$font_weight_normal: 400;
+$font_weight_bold: 600;
+$margin_section_title: 1rem;
+$padding_medium:  0.4em 0.7em;
+$padding_heavy: 2em 2.2em;
+
+// Begin SCSS rules here
+// .some-selector {
+//     background: somevalue;
+// }
+
+// Remove padding from left and right of the container-fluid class
+.container-fluid {
+    padding: 0;
+}
+
+strong {
+    font-weight: $font_weight_bold;
+}
+
+h1 {
+    // text-align: center;
+    font-size: 5rem;
+    font-weight: $font_weight_bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    text-shadow: 0.03em 0.03em 2px rgba(0,0,0,0.4);
+}
+
+h2 {
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    // margin-top: 5rem;
+    // margin-bottom: 3rem;
+}
+
+p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.64;
+    font-weight: $font_weight_light;
+}
+
+a {
+    color: $color_link;
+    background-color: $color_link_bg;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    font-weight: $font_weight_normal;
+
+    &:visited {
+        color: $color_link;
+    }
+    &:hover {
+        background-color: $color_link_hover_bg;
+        color: lighten($color_link, 8%);
+        text-decoration: none;
+    }
+    &:active {
+        color: lighten($color_link, 13%);
+    }
+}
+
+// button {
+//     margin-top: 1em;
+//     margin-bottom: 1em;
+// }
+//
+.section-title h2 {
+    text-align: center;
+    font-size: $font_size_section_title;
+    margin-bottom: $margin_section_title;
+}
+
+.title-change {
+    // We'll be exposing these via javascript
+    display: none;
+    font-family: $font_family_title_change;
+    color: #317b0a;
+}
+
+.subtitle {
+    color: rgb(212, 215, 218);
+    text-shadow: 0.03em 0.03em 2px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 2rem;
+}
+
+.fadein-end {
+    display: none;
+}
+
+#your-place-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+#above-fold {
+    // Set the background image and tell it to cover the entire div, locking the
+    // top right corner in place
+    background: url($path_img_base + '/finish-college-background.fade.jpg');
+    background-size: cover;
+    background-position: top right;
+
+    h1 {
+        margin-top: 2em;
+    }
+}
+
+#finish-college {
+    display: block;
+
+    color: $color_text_default;
+
+    font-family: $font_family;
+    font-weight: $font_weight_normal;
+}
+
+// For every other row set the background slightly different to differentiate
+#below-fold > .container-width-large > .row:nth-of-type(odd) {
+    background-color: $color_row_odd;
+}
+
+#below-fold > .container-width-large > .row:nth-of-type(even) {
+    background-color: $color_row_even;
+}
+
+#pitch {
+    padding: $padding_heavy;
+}
+
+.page-section {
+    padding: $padding_heavy;
+}
+
+@media screen and (min-width: $screen-xs-min) {
+    // For anything other than a really small screen
+    #above-fold {
+        min-height: 600px;
+    }
+}
+
+@media screen and (min-width: $screen-sm-min) {
+    // Medium and large screen devices
+}
