@@ -17,7 +17,7 @@ module.exports = function(grunt) {
                 css: '<%= project.themedir %>/dev/css',
                 js: '<%= project.themedir %>/dev/js',
                 scss: '<%= project.themedir %>/src/scss',
-                bootstrap: '<%= project.themedir %>/src/bootstrap',
+                bootstrap: '<%= project.themedir %>/src/bootstrap3',
             },
             src: {
                 js: '<%= project.basedir %>/src/js',
