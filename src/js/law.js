@@ -9,28 +9,38 @@
     require(['jquery'], function($){
         // Wait for the DOM to be fully loaded
         $(function () {
+            $('.goto-request-form').click(function() {
+                // Get the target to scroll to
+                var $target = $('#request-form'), timeAnimate = 500;
+
+                // Begin the animation
+                $('html, body').animate({
+                    scrollTop: $target.offset().top
+                }, timeAnimate);
+
+                // Put the cursor in the first field
+                $('#entry_1738965336').focus();
+
+                return false;
+            });
+
+            $('.zopim-fade-in').hide();
+
             // Determine if the Zopim client is loaded up and available
             if (typeof $zopim !== 'undefined') {
                 // Tell the zopim client to hide immediately upon API ready
                 $zopim(function () {
                     $zopim.livechat.window.hide();
-                });
 
-                // Add a click handler to open up the zopim livechat window
-                $('#your-place #lets-talk').click(function () {
-                    $zopim.livechat.window.show();
+                    // Add a click handler to open up the zopim livechat window
+                    $('.chat-open').click(function () {
+                        $zopim.livechat.window.show();
+                    });
+
+                    // Fade the open chat button in
+                    $('.zopim-fade-in').fadeIn(500);
                 });
             }
-
-            // If a user clicks on the "Send me information" header then focus on the form item
-            $('#your-place #send-me-information').click(function () {
-                $('#entry_1738965336').focus();
-            });
-
-            // If the user clicks on the "Start your application" header then redirect to the admissions item
-            $('#your-place #start-your-application').click(function () {
-                document.location.href='http://uas.alaska.edu/apply';
-            });
             /*
             TODO - complete whenever IT gives me the go-ahead for CURL installation on serverside
 
