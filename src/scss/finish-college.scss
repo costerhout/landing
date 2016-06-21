@@ -162,10 +162,22 @@ a {
     padding: $padding_heavy;
 }
 
+.page-section > .row:not(.section-title) {
+    margin-top: 2em;
+}
+
+div[class^='video-container'] {
+    margin-top: 2em;
+}
+
 @media screen and (min-width: $screen-xs-min) {
     // For anything other than a really small screen
     #above-fold {
         min-height: 600px;
+    }
+
+    div[class^='video-container'] {
+        margin-top: 3em;
     }
 }
 
