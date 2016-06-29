@@ -1,3 +1,12 @@
+// @Author: Colin Osterhout <ctosterhout>
+// @Date:   2016-06-10T08:14:10-08:00
+// @Email:  ctosterhout@alaska.edu
+// @Project: BERT
+// @Last modified by:   ctosterhout
+// @Last modified time: 2016-06-24T11:12:48-08:00
+// @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
+
+
 // Import path variables. The SASS compiler will resolve the paths import based on the variables in GruntFile.js
 @import 'paths';
 
@@ -8,10 +17,10 @@
 
 // Load up our development font
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
-@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
 
 // $color_text_default: rgb(215, 207, 199);
 $color_text_default: #0a1d01;
+$color_body: #245489;
 // $color_link: #4433b7;
 $color_link: #4c7104;
 $color_link_bg: #ffda05;
@@ -19,11 +28,11 @@ $color_link_hover_bg: #fcc001;
 $color_form_button: $color_link;
 $color_form_button_bg: $color_link_bg;
 $color_form_button_hover_bg: $color_link_hover_bg;
+$color_jumbotron: #001250;
 $color_row_odd: #f0f0f0;
 $color_row_even: #e5e7d4;
 $color_white: #f4f6f8;
 $font_family: 'Open Sans', sans-serif;
-$font_family_title_change: 'Shadows Into Light Two', 'Brush Script MT', 'Papyrus', sans-serif;
 $font_size_section_title: 2.8rem;
 $font_weight_light: 300;
 $font_weight_normal: 400;
@@ -98,12 +107,7 @@ a {
 }
 
 body {
-    background-color: #245489;
-}
-
-#title-change {
-    font-family: $font_family_title_change;
-    color: #317b0a;
+    background-color: $color_body;
 }
 
 #above-fold {
@@ -118,25 +122,15 @@ body {
 
 #above-fold-received {
     color: $color_white;
-    background: url($path_img_base + '/law-received.svg');
-    background-size: 100%;
-    background-repeat: no-repeat;
+    // background: url($path_img_base + '/law-received.svg');
+    // background-size: 100%;
+    // background-repeat: no-repeat;
     width: 100%;
     padding-bottom: 56.5%;
-
 
     p {
         font-size: 2rem;
     }
-}
-
-#finish-college {
-    display: block;
-
-    color: $color_text_default;
-
-    font-family: $font_family;
-    font-weight: $font_weight_normal;
 }
 
 // For every other row set the background slightly different to differentiate
@@ -153,6 +147,28 @@ body {
     color: $color_white;
 }
 
+.foreground {
+    position: relative;
+    z-index: 9999;
+}
+
+.background-container {
+    position: relative;
+}
+
+.background-float {
+    position: absolute;
+    z-index: 0;
+}
+
+#law-received-glyph {
+    font-size: 10rem;
+    color: transparentize($color_body, 0.5);
+    transform: translate(-50%, 20%);
+    top:0;
+    right: 0;
+}
+
 .page-section {
     padding: $padding_heavy;
 }
@@ -164,14 +180,26 @@ body {
 .zopim-fade-in {
 }
 
+.jumbotron {
+    background-color: $color_jumbotron;
+}
+
 div[class^='video-container'] {
     margin-top: 2em;
+}
+
+.margin-medium {
+    margin: 1em;
 }
 
 @media screen and (min-width: $screen-xs-min) {
     // For anything other than a really small screen
     div[class^='video-container'] {
         margin-top: 3em;
+    }
+
+    #law-received-glyph {
+        font-size: 15rem;
     }
 }
 
@@ -181,5 +209,10 @@ div[class^='video-container'] {
         p {
             font-size: 2rem;
         }
+    }
+
+    #law-received-glyph {
+        font-size: 20rem;
+        transform: translate(-30%, 0%);
     }
 }
