@@ -1,4 +1,15 @@
 /**
+* @Author: Colin Osterhout <ctosterhout>
+* @Date:   2016-04-19T14:12:58-08:00
+* @Email:  ctosterhout@alaska.edu
+* @Project: BERT
+* @Last modified by:   ctosterhout
+* @Last modified time: 2016-07-12T15:55:34-08:00
+* @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
+*/
+
+
+/**
  * Grunt Module
  */
 
@@ -20,16 +31,23 @@ module.exports = function(grunt) {
                 bootstrap: '<%= project.themedir %>/src/bootstrap3',
             },
             src: {
+                xslt: '<%= project.basedir %>/src/xslt',
                 js: '<%= project.basedir %>/src/js',
                 scss: '<%= project.basedir %>/src/scss'
             },
             dist: {
+                xslt: '<%= project.basedir %>/dist/xslt',
                 js: '<%= project.basedir %>/dist/js',
                 css: '<%= project.basedir %>/dist/css'
             },
             dev: {
                 js: '<%= project.basedir %>/dev/js',
                 css: '<%= project.basedir %>/dev/css'
+            },
+            preflight: {
+                cmspath: '/_assets/stylesheets/bert',
+                stylesheet: '<%= project.basedir %>/util/cms-preflight.xslt',
+                strip: 'src/xslt'
             }
         },
         sass: {
@@ -121,6 +139,24 @@ module.exports = function(grunt) {
                     ]
                 },
                 src: '<%= project.dev.css %>/**/*.css'
+            }
+        },
+        xsltproc: {
+            options: {
+                stylesheet: '<%= project.preflight.stylesheet %>',
+                stringparams: {
+                    'sPathBase': '<%= project.preflight.cmspath %>',
+                    'sPathStrip': '<%= project.preflight.strip %>'
+                },
+                filepath: true
+            },
+            compile: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= project.src.xslt %>',
+                    src: './**/*.xslt',
+                    dest: '<%= project.dist.xslt %>'
+                }]
             }
         },
         // Preen the javascript files
@@ -244,6 +280,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-xsltproc');
+    grunt.loadNpmTasks('grunt-shell');
 
     /**
     * Default task
