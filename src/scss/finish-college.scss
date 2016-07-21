@@ -3,7 +3,7 @@
 // @Email:  ctosterhout@alaska.edu
 // @Project: BERT
 // @Last modified by:   ctosterhout
-// @Last modified time: 2016-06-29T12:45:30-08:00
+// @Last modified time: 2016-07-19T15:57:59-08:00
 // @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
 
 
@@ -16,23 +16,23 @@
 @import 'partials/base';
 
 // Load up our development font
-@import url(https://fonts.googleapis.com/css?family=Lora|Open+Sans:400,600|Bowlby+One|Chivo:900|Rubik+One|Work+Sans:800,900);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600|Work+Sans:800,900);
 
 // $font_family_title: 'Open Sans', sans-serif;
 $font_family_title: 'Work Sans';
-// $font_family_body: 'Lora', 'Times New Roman', 'Times', serif;
 $font_family_body: 'Open Sans', sans-serif;
 
 // $color_text_default: rgb(215, 207, 199);
 $color_text_default: #0a1d01;
 $color_white: #ffffff;
-// $color_link: #4433b7;
 $color_light_blue: #1F98DC;
 $color_blue: #005C9E;
 $color_green: #D0E534;
+$color_dark_green: #73a73a;
 $color_link: #4c7104;
 $color_link_bg: #ffda05;
 $color_link_hover_bg: #fcc001;
+$color_body_received: $color_blue;
 $color_form_button: $color_link;
 $color_form_button_bg: $color_link_bg;
 $color_form_button_hover_bg: $color_link_hover_bg;
@@ -47,20 +47,16 @@ $margin_section_title: 1rem;
 $padding_medium:  0.4em 0.7em;
 $padding_heavy: 2em 2.2em;
 $height_above_fold: 600px;
-$height_section_title: 6em;
+$height_section_title: 7rem;
 $gradient_blue_box: linear-gradient(90deg, $color_light_blue $height_section_title, $color_blue 0%, $color_blue 100%);
-$gradient_green_box: linear-gradient(90deg, $color_green $height_section_title, $color_blue 0%, $color_blue 100%);
-
+$gradient_green_box: linear-gradient(90deg, $color_green $height_section_title, $color_blue $height_section_title, $color_blue 100%);
+$gradient_header_bar: linear-gradient(90deg, $color_green $height_section_title, $color_light_blue $height_section_title, $color_light_blue $height_section_title * 2, $color_blue 0%, $color_blue 100%);
+$gradient_right_fade_blue: linear-gradient(90deg, transparent, transparent 65%, $color_blue 100%);
 
 // Begin SCSS rules here
 // .some-selector {
 //     background: somevalue;
 // }
-
-// Remove padding from left and right of the container-fluid class
-.container-fluid {
-    padding: 0;
-}
 
 strong {
     font-weight: $font_weight_bold;
@@ -79,30 +75,35 @@ h2 {
     font-size: 2.5rem;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
+    margin: 0.3em 0;
+}
+
+body {
+    font-size: 1.6rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.64;
+    font-family: $font_family_body;
+    font-weight: $font_weight_light;
 }
 
 p {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    font-size: 1.6rem;
-    letter-spacing: 0.03em;
-    line-height: 1.64;
-    font-weight: $font_weight_light;
+}
+
+ul {
+    padding-left: 1.5em;
 }
 
 a {
-    color: $color_link;
-    background-color: $color_link_bg;
-    padding-left: 0.25em;
-    padding-right: 0.25em;
     font-weight: $font_weight_normal;
 
     &:visited {
         color: $color_link;
     }
     &:hover {
-        background-color: $color_link_hover_bg;
-        color: lighten($color_link, 8%);
+        color: lighten($color_link, 15%);
         text-decoration: none;
     }
     &:active {
@@ -110,16 +111,37 @@ a {
     }
 }
 
-// button {
-//     margin-top: 1em;
-//     margin-bottom: 1em;
-// }
-//
+div[class^='video-container'] {
+    margin-top: 2em;
+}
+
+// Remove padding from left and right of the container-fluid class
+.container-fluid {
+    padding: 0;
+}
 
 .overview {
     font-family: $font_family_title;
-    font-size: 1.5rem;
-    color: darken($color_green, 25%);
+    font-size: 2rem;
+    color: $color_blue;
+    padding: 0 0.5em;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    p {
+        margin-bottom: 2em;
+    }
+}
+
+.xs-text-center {
+    text-align: center;
+}
+
+.row.section-title {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .section-title {
@@ -138,18 +160,30 @@ a {
     }
 }
 
+.page-title {
+    padding: $padding_heavy;
+    margin-bottom: 3em;
+    min-height: 5em;
+
+    color: $color_blue;
+    background: $color_green;
+
+    h1 {
+        text-transform: uppercase;
+        display: block;
+        text-align: center;
+    }
+}
+
 .wrapper-cta {
     h2 {
         color: $color_blue;
+        margin-top: 0;        // taking care of this in the row padding
     }
 }
 
 .center-block {
     text-align: center;
-}
-
-.wrapper-cta {
-    margin-top: 2em;
 }
 
 .subtitle {
@@ -167,63 +201,35 @@ a {
     display: none;
 }
 
-#box-online {
-    background: url($path_img_base + '/box-online.png');
-    background-size: cover;
-    background-position: top left;
-    // The width is set by the size of the parent column. This sets the height relative to that
-    padding-bottom: 70%;
+.pull-left {
+    margin-right: 1em;
 }
 
-#box-title {
-    background: url($path_img_base + '/box-title.png');
-    background-size: cover;
-    background-position: top left;
-    // The width is set by the size of the column. This sets the height relative to that
-    padding-bottom: 100%;
+.pull-right {
+    margin-left: 1em;
 }
 
-#box-title-xs .section-title {
-    padding-top: 5em;
-    padding-bottom: 1em;
+.uas-logo {
+    width: 90%;
+    height: auto;
+    margin: 2em;
 }
 
-#finish-college {
-    display: block;
-
-    color: $color_text_default;
-
-    font-family: $font_family_body;
-    font-weight: $font_weight_normal;
+.full-width {
+    width: 100%;
 }
 
-// For every other row set the background slightly different to differentiate
-// #below-fold > .container-width-large > .row:nth-of-type(odd) {
-//     background-color: $color_row_odd;
-// }
-//
-// #below-fold > .container-width-large > .row:nth-of-type(even) {
-//     background-color: $color_row_even;
-// }
-
-#pitch {
-    padding: $padding_heavy;
-}
-
-.page-section {
-    padding: $padding_heavy;
+.header-bar {
+    background: $gradient_header_bar;
+    margin: 0;
 }
 
 .section-content {
-    margin-top: 2em;
+    margin: 2em 0;
 
     h2 {
         color: $color_blue;
     }
-}
-
-div[class^='video-container'] {
-    margin-top: 2em;
 }
 
 .btn {
@@ -234,26 +240,72 @@ div[class^='video-container'] {
     padding: 0;
 }
 
-#footer {
-    margin-bottom: 3em;
+.align-bottom {
+    position: absolute;
+    bottom: 0;
 }
 
+
+#footer {
+    margin-bottom: 3em;
+
+    .wrapper-cta {
+        margin-top: 2rem;
+    }
+
+    .section-content h3 {
+        margin: 0;
+    }
+}
+
+#above-fold {
+    position: relative;
+}
+
+#pitch {
+    margin: 2em 0;
+    padding: $padding_heavy;
+}
+
+
 @media screen and (min-width: $screen-sm-min) {
-    // For anything other than a really small screen
-    #above-fold, #above-fold-overlay {
+
+    .xs-text-center {
+        text-align: initial;
+    }
+
+    #pitch {
+        margin: 1em 0;
+        padding: $padding-small-vertical $padding-small-horizontal 0 0;
+    }
+
+    #above-fold-main {
         min-height: $height_above_fold;
+    }
+
+    h1 {
+        font-size: 5rem;
     }
 
     div[class^='video-container'] {
         margin-top: 3em;
     }
 
-    #above-fold {
+    #above-fold-main {
         // Set the background image and tell it to cover the entire div, locking the
         // top right corner in place
-        background: url($path_img_base + '/finish-college-background.fade.jpg');
+        background: url($path_img_base + '/finish-college-background.jpg');
         background-size: cover;
         background-position: top right;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: $gradient_right_fade_blue;
+        }
     }
 
     #box-title {
@@ -266,33 +318,47 @@ div[class^='video-container'] {
         padding: 0;
     }
 
-    #box-title-wrapper {
-        // margin-left: $height_section_title;
-        // padding: 0;
-    }
-
-
     // Medium and large screen devices
     // Remove left padding from first column to make it flush left within the row
-    .page-section .row > div[class^='col-']:first-of-type {
+    .page-section .row.section-content > div[class^='col-']:first-of-type {
         padding-left: 0;
     }
 
     // Remove right padding from last column to make it flush right within the row
-    .page-section .row > div[class^='col-']:last-of-type {
+    .page-section .row.section-content > div[class^='col-']:last-of-type {
         padding-right: 0;
     }
 
-    .page-section:nth-of-type(even) .section-title {
-        background: $gradient_blue_box;
+    .page-title {
+        padding: 0 0 0 2em;
+
+        h1 {
+            display: inline;
+            text-align: left;
+        }
     }
 
     .page-section:nth-of-type(odd) .section-title {
+        background: $gradient_blue_box;
+    }
+
+    .page-section:nth-of-type(even) .section-title {
         background: $gradient_green_box;
     }
 
     .section-content {
         padding-left: $height_section_title;
         padding-right: $height_section_title;
+    }
+
+    .overview p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (min-width: $screen-md-min) {
+    h1 {
+        font-size: 6rem;
     }
 }
