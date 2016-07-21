@@ -1,0 +1,360 @@
+// @Author: Colin Osterhout <ctosterhout>
+// @Date:   2016-07-20T14:25:39-08:00
+// @Email:  ctosterhout@alaska.edu
+// @Project: BERT
+// @Last modified by:   ctosterhout
+// @Last modified time: 2016-07-20T16:38:01-08:00
+// @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
+
+// Import path variables. The SASS compiler will resolve the paths import based on the variables in GruntFile.js
+@import 'paths';
+@import 'modules/uas-palette';
+
+// Place base variable overrides here prior to importing the base partial
+
+// Import basic variables that will be used across sub projects
+@import 'partials/base';
+
+// Load up our development font
+@import url('https://fonts.googleapis.com/css?family=Muli|Ubuntu');
+
+// Font definitions
+$font_stack_content: 'Muli', 'Arial', sans-serif;
+$font_stack_heading: 'Ubuntu', 'Muli', 'Arial', sans-serif;
+$header_elements: (h1, h2, h3, h4, h5);
+
+$color_text_default: rgb(51,51,51);
+$color_text_light: #f0f0f0;
+
+// $color-link: #4c7104;
+// $color-link-hover: #23527c;
+// $color-link-background: #ffda05;
+// $color-link-hover-background: #fcc001;
+
+$color_form_button: $color_text_light;
+$color_form_button_bg: $color-uas-green;
+$color_form_button_hover_bg: darken($color_form_button_bg, 20%);
+$font_family: 'Open Sans', sans-serif;
+$font_weight_light: 300;
+$font_weight_normal: 400;
+$font_weight_bold: 600;
+$padding_medium:  0.4em 0.7em;
+$padding_heavy: 30px;
+$padding_above_fold: $padding_heavy;
+$height_above_fold_lg: 1000px;
+$color_title: $color_text_light;
+$border_radius: 5px;
+
+$list_bullet_point: (
+    (
+        selector-suffix: 1,
+        color-heading: $color-uas-blue,
+        color: $color_text_default,
+        background-color: white
+    ),
+    (
+        selector-suffix: 2,
+        color-heading: $color-uas-salmon,
+        color: $color_text_default,
+        background-color: white
+    ),
+    (
+        selector-suffix: 3,
+        color-heading: $color-uas-green,
+        color: $color_text_default,
+        background-color: white
+    )
+);
+
+// Begin SCSS rules here
+// .some-selector {
+//     background: somevalue;
+// }
+
+// Remove padding from left and right of the container-fluid class
+
+strong {
+    font-weight: $font_weight_bold;
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: $font_weight_bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 3rem;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    letter-spacing: 0.03em;
+    line-height: 1.64;
+    font-weight: $font_weight_light;
+}
+
+a {
+    color: $color-link;
+    background-color: $color-link-background;
+    // padding-left: 0.25em;
+    // padding-right: 0.25em;
+    font-weight: $font_weight_normal;
+
+    &:visited {
+        color: $color-link;
+    }
+    &:hover {
+        background-color: $color-link-hover-background;
+        color: lighten($color-link, 8%);
+        text-decoration: none;
+    }
+    &:active {
+        color: lighten($color-link, 13%);
+    }
+}
+
+button {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+// Set all headers above the fold to have the "heading" type font
+#above-fold {
+    @for $i from 1 through length( $header_elements ) {
+        #{nth($header_elements, $i)} {
+            font-family: $font_stack_heading;
+            font-weight: $font_weight_bold;
+        }
+    }
+
+    // Set the background image and tell it to cover the entire div, locking the
+    // top right corner in place
+    display: block;
+    background-color: $color-uas-blue;
+
+    // Set font characteristics
+    color: $color_text_light;
+}
+
+
+#elementary-teacher {
+    color: $color_text_default;
+
+    font-family: $font_stack_content;
+    font-weight: $font_weight_normal;
+}
+
+#elementary-teacher-logo {
+    max-width: 250px;
+    width: 100%;
+}
+
+// ************************************************************
+// Set up the bullet points
+// ************************************************************
+
+// Global to all bullet points
+.bullet-point {
+    padding-left: 2rem;
+    width: 100%;
+    margin: inherit auto;
+
+    h2 {
+        font-family: $font_stack_heading;
+        font-size: 2.5rem;
+    }
+}
+
+@each $map_stripe in $list_bullet_point {
+    .bullet-point:nth-of-type(#{map-get($map_stripe, 'selector-suffix')}) {
+        color: map-get($map_stripe, 'color');
+        background-color: map-get($map_stripe, 'background-color')
+    }
+
+    .bullet-point:nth-of-type(#{map-get($map_stripe, 'selector-suffix')}) h2,
+    .bullet-point:nth-of-type(#{map-get($map_stripe, 'selector-suffix')}) .highlight,
+     {
+        color: map-get($map_stripe, 'color-heading');
+    }
+}
+
+// ************************************************************
+// Helper classes
+// ************************************************************
+
+.sm-align-center {
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 2rem;
+}
+
+.subtitle-large {
+    font-size: 3rem;
+}
+
+.btn-flat {
+    border-radius: 0;
+    width: 100%;
+    background-color: $color_form_button_bg;
+    color: $color_form_button;
+
+    &:hover {
+        color: $color-link;
+        background-color: $color_form_button_hover_bg;
+    }
+}
+
+.link {
+    cursor: pointer;
+}
+
+.title-box {
+    display: inline-block;
+    border: 2px solid $color_text_default;
+    padding: $padding_medium;
+}
+
+.padding-heavy {
+    padding: $padding_heavy;
+}
+
+.align-middle-parent {
+    position: relative;
+}
+
+.align-middle {
+    transform: translate(0, -50%);
+}
+
+.form-control {
+    border-radius: 0px;
+}
+
+.container-width-large {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+// Title of the page
+.title {
+    color: $color_title;
+    background-color: rgba(0,0,0,0.14);
+    border-radius: $border_radius;
+    padding-top: $padding_heavy;
+    padding-bottom: $padding_heavy;
+
+    h1 {
+        margin-top: 0;
+        text-shadow: 0.04em 0.04em 3px rgba(56, 56, 56, 0.8);
+    }
+}
+
+// Container for form and buttons
+.wrapper-cta, .overview {
+}
+
+// Main description box above the fold
+.overview {
+    // TODO
+}
+
+// The information on the right side of the information rows
+.description h2 {
+    text-align: center;
+}
+
+// The font-awesome icons on the left side of the information rows
+.highlight {
+    font-size: 8rem;
+    text-align: center;
+}
+
+
+#above-fold {
+    padding: $padding_heavy;
+}
+
+#below-fold {
+    padding-top: $padding_heavy;
+}
+
+@media screen and (min-width: $screen-sm-min) {
+    // Container for form and buttons
+    .wrapper-cta, .overview {
+        background-color: transparentize($color-uas-blue, 0.2);
+        border-radius: $border_radius;
+        padding: 2rem;
+    }
+
+    #elementary-teacher {
+        font-size: 1.6rem;
+    }
+
+    .sm-align-center {
+        text-align: initial;
+    }
+
+    button {
+        margin: initial;
+    }
+
+    h1 {
+        font-size: 7.2rem;
+        font-weight: $font_weight_bold;
+        text-align: left;
+    }
+
+    h2 {
+        font-size: 3rem;
+        letter-spacing: 0.15rem;
+        text-align: left;
+    }
+
+    p {
+        margin-top: 2rem;
+        margin-bottom: 2.5rem;
+        font-weight: $font_weight_light;
+    }
+
+    .description h2 {
+        text-align: left;
+    }
+
+    #above-fold {
+        background: url($path_img_base + '/elementary-teacher-background.jpg') no-repeat center center;
+        background-size: cover;
+
+        min-height: $height_above_fold_lg;
+        padding: $padding_above_fold;
+    }
+
+    #above-fold-inner {
+        min-height: $height_above_fold_lg - $padding_above_fold;
+    }
+
+    .pitch {
+        position: absolute;
+        bottom: 0;
+    }
+
+    .bullet-point {
+        padding-left: 10rem;
+        width: 100%;
+        margin: inherit auto;
+    }
+
+    .bullet-point h2 {
+        font-family: $font_stack_heading;
+        font-size: 4rem;
+    }
+}
