@@ -5,7 +5,7 @@
 @Email:  ctosterhout@alaska.edu
 @Project: BERT
 @Last modified by:   ctosterhout
-@Last modified time: 2016-07-13T15:10:49-08:00
+@Last modified time: 2016-07-21T16:51:25-08:00
 @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
 -->
 
@@ -38,14 +38,16 @@
         Match the top level system-index-block, invoking the locally defined system-block template
     </xd:doc>
     <xsl:template match="system-index-block">
-        <div class="page-section">
-            <div class="row section-title">
-                <div class="col-sm-12">
-                    <h2>What our <span class='title-highlight'>students</span> say</h2>
+        <div class="row page-section">
+            <div class="col-sm-12">
+                <div class="row section-title">
+                    <div class="col-sm-12">
+                        <h2>What our <span class='title-highlight'>students</span> say</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="row section-content">
-                <xsl:apply-templates select="system-block[.//video-container]"/>
+                <div class="row section-content">
+                    <xsl:apply-templates select="system-block[.//video-container]"/>
+                </div>
             </div>
         </div>
     </xsl:template>

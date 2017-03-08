@@ -3,12 +3,18 @@
 // @Email:  ctosterhout@alaska.edu
 // @Project: BERT
 // @Last modified by:   ctosterhout
-// @Last modified time: 2016-07-19T15:57:59-08:00
+// @Last modified time: 2017-01-17T16:51:21-09:00
 // @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
 
 
 // Import path variables. The SASS compiler will resolve the paths import based on the variables in GruntFile.js
+@import 'buildvar';
 @import 'paths';
+
+// Override the default path since we're hosting in a different spot
+@if $build == 'DIST' {
+    $path_img_base: '/assets/img';
+}
 
 // Place base variable overrides here prior to importing the base partial
 
@@ -16,51 +22,47 @@
 @import 'partials/base';
 
 // Load up our development font
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600|Work+Sans:800,900);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,900|Work+Sans:600,800,900);
 
 // $font_family_title: 'Open Sans', sans-serif;
 $font_family_title: 'Work Sans';
 $font_family_body: 'Open Sans', sans-serif;
 
 // $color_text_default: rgb(215, 207, 199);
+$color_black: black;
 $color_text_default: #0a1d01;
 $color_white: #ffffff;
 $color_light_blue: #1F98DC;
 $color_blue: #005C9E;
 $color_green: #D0E534;
-$color_dark_green: #73a73a;
+$color_light_blue: #0099d7;
+$color_med_green: #53b157;
 $color_link: #4c7104;
 $color_link_bg: #ffda05;
 $color_link_hover_bg: #fcc001;
 $color_body_received: $color_blue;
-$color_form_button: $color_link;
-$color_form_button_bg: $color_link_bg;
+$color_form_button: $color_white;
+$color_form_button_bg: $color_med_green;
 $color_form_button_hover_bg: $color_link_hover_bg;
 $color_row_odd: #f0f0f0;
 $color_row_even: #e5e7d4;
 $color_title_highlight: $color_green;
-$font_size_section_title: 2.5em;
+$font_size_section_title: 3.5rem;
+$font_size_section_title_lg: 4rem;
 $font_weight_light: 300;
 $font_weight_normal: 400;
 $font_weight_bold: 800;
 $margin_section_title: 1rem;
 $padding_medium:  0.4em 0.7em;
 $padding_heavy: 2em 2.2em;
+$padding_light: 1em;
 $height_above_fold: 600px;
+$height_above_fold_lg: 850px;
 $height_section_title: 7rem;
 $gradient_blue_box: linear-gradient(90deg, $color_light_blue $height_section_title, $color_blue 0%, $color_blue 100%);
 $gradient_green_box: linear-gradient(90deg, $color_green $height_section_title, $color_blue $height_section_title, $color_blue 100%);
 $gradient_header_bar: linear-gradient(90deg, $color_green $height_section_title, $color_light_blue $height_section_title, $color_light_blue $height_section_title * 2, $color_blue 0%, $color_blue 100%);
 $gradient_right_fade_blue: linear-gradient(90deg, transparent, transparent 65%, $color_blue 100%);
-
-// Begin SCSS rules here
-// .some-selector {
-//     background: somevalue;
-// }
-
-strong {
-    font-weight: $font_weight_bold;
-}
 
 h1,h2,h3,h4,h5 {
     font-family: $font_family_title;
@@ -68,7 +70,7 @@ h1,h2,h3,h4,h5 {
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 h2 {
@@ -76,6 +78,7 @@ h2 {
     letter-spacing: 0.1rem;
     text-transform: uppercase;
     margin: 0.3em 0;
+    line-height: 1.64;
 }
 
 body {
@@ -90,6 +93,7 @@ body {
 p {
     margin-top: 1rem;
     margin-bottom: 1rem;
+    font-size: 1.6rem;
 }
 
 ul {
@@ -115,42 +119,189 @@ div[class^='video-container'] {
     margin-top: 2em;
 }
 
-// Remove padding from left and right of the container-fluid class
-.container-fluid {
-    padding: 0;
+/*
+#pageTitle {
+  padding: 2em 2.2em;
+  margin-bottom: 3em;
+  min-height: 5em;
+  text-align: center;
 }
 
-.overview {
-    font-family: $font_family_title;
-    font-size: 2rem;
-    color: $color_blue;
-    padding: 0 0.5em;
+#pageTitle h1 {
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+}
+*/
+#pageTitle {
+    padding: 1.5em;
+    margin-bottom: 0;
+    margin-left: 1.5em;
+}
+#pageTitle h1 {
+    font-size: 6rem;
+    text-align: center;
+    text-transform: uppercase;
+}
 
-    h3 {
-        margin-top: 0;
+#aboveFoldTopRowMiddleCol {
+    z-index: 10;
+}
+#graduationCapParent {
+    position: relative;
+    z-index: 4000;
+    min-height: 600px;
+}
+
+#graduationCap {
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 40%;
+    z-index: 20;
+}
+
+#aboveFoldTeaser {
+    padding-left: 30%;
+    padding-right: 1em;
+    height: 100%;
+
+    h2 {
+        font-size: 3rem;
+        line-height: 1.1;
+        font-weight: 600;
+        margin-top: 2em;
+        margin-right: 1em;
+        letter-spacing: normal;
+        z-index: 100;
+    }
+}
+
+#aboveFoldMainImage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-image: url($path_img_base + '/finish-college-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    padding-bottom: 50%;
+    height: 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(65%, transparent), to(#005C9E));
+      background-image: -webkit-linear-gradient(left, transparent, transparent 65%, #005C9E 100%);
+      background-image: -o-linear-gradient(left, transparent, transparent 65%, #005C9E 100%);
+      background-image: linear-gradient(90deg, transparent, transparent 65%, #005C9E 100%);
+    }
+}
+
+#bottomPage h3 {
+    text-transform: uppercase;
+    color: #005C9E;
+}
+
+#aboveFoldOnlineLearningText {
+    padding-top: 2em;
+    padding-bottom: 1em;
+    line-height: 1.3;
+
+    p {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #005C9E;
+    }
+}
+
+#aboveFoldOnlineLearningImage {
+    background-image: url($path_img_base + '/computer.png');
+    background-image: linear-gradient(transparent, transparent), url($path_img_base + '/computer.svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 0;
+    width: 100%;
+    padding-bottom: 80%;
+    margin-top: 4em;
+}
+
+#phoneNumber {
+    address {
+        margin: 0;
     }
 
     p {
-        margin-bottom: 2em;
+        font-size: 5rem;
+        font-weight: bold;
     }
+
+    text-align: center;
+    padding: 0.5em;
+}
+
+#requestForm {
+    padding: 1em;
+
+    h2 {
+        text-align: center;
+        background-image: url($path_img_base + '/brushstroke.png');
+        background-image: url($path_img_base + '/brushstroke.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        color: #005C9E;
+    }
+}
+
+#submitBottom {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+// Remove padding from left and right of the container-fluid class
+.container-fluid {
+    max-width: 1700px;
+}
+
+.position-parent {
+    position: relative;
 }
 
 .xs-text-center {
     text-align: center;
 }
 
-.row.section-title {
-    margin-left: 0;
-    margin-right: 0;
+.fill-green {
+    background-color: $color_green;
+    color: $color_blue;
+}
+
+.fill-light-blue {
+    background-color: $color_light_blue;
+    color: $color_white;
+}
+
+.fill-dark-blue {
+    background-color: $color_blue;
+    color: $color_white;
+}
+
+.fill-white {
+    background-color: $color_white;
+    color: $color_black;
 }
 
 .section-title {
     min-height: $height_section_title;
     color: $color_white;
     background-color: $color_blue;
-}
-
-.section-title {
     text-align: center;
     margin-bottom: $margin_section_title;
     text-transform: uppercase;
@@ -160,45 +311,25 @@ div[class^='video-container'] {
     }
 }
 
-.page-title {
-    padding: $padding_heavy;
-    margin-bottom: 3em;
-    min-height: 5em;
+.thumbnail {
+    padding: 1em;
 
-    color: $color_blue;
-    background: $color_green;
-
-    h1 {
-        text-transform: uppercase;
-        display: block;
-        text-align: center;
+    h3 {
+        font-weight: normal;
     }
 }
 
-.wrapper-cta {
-    h2 {
-        color: $color_blue;
-        margin-top: 0;        // taking care of this in the row padding
-    }
+.large {
+    font-size: 135%;
+    font-weight: 800;
 }
 
 .center-block {
     text-align: center;
 }
 
-.subtitle {
-    color: rgb(212, 215, 218);
-    text-shadow: 0.03em 0.03em 2px rgba(0, 0, 0, 0.4);
-    background-color: rgba(0, 0, 0, 0.3);
-    font-size: 2rem;
-}
-
 .title-highlight {
     color: $color_title_highlight;
-}
-
-.fadein-end {
-    display: none;
 }
 
 .pull-left {
@@ -209,19 +340,27 @@ div[class^='video-container'] {
     margin-left: 1em;
 }
 
+.image-padding-large {
+    padding: 3em;
+}
+
+.image-padding-small {
+    padding: 0.5em;
+}
+
 .uas-logo {
-    width: 90%;
-    height: auto;
-    margin: 2em;
+    background: url($path_img_base + '/uas-logo-color-reverse.png');
+    background: linear-gradient(transparent, transparent), url($path_img_base + '/uas-logo-color-reverse.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
 }
 
 .full-width {
     width: 100%;
-}
-
-.header-bar {
-    background: $gradient_header_bar;
-    margin: 0;
 }
 
 .section-content {
@@ -233,89 +372,23 @@ div[class^='video-container'] {
 }
 
 .btn {
-    margin-bottom: 1em;
+    background-color: $color_form_button_bg;
+    color: $color_form_button;
 }
-
-.row-title > div[class^='col-'] {
-    padding: 0;
-}
-
-.align-bottom {
-    position: absolute;
-    bottom: 0;
-}
-
-
-#footer {
-    margin-bottom: 3em;
-
-    .wrapper-cta {
-        margin-top: 2rem;
-    }
-
-    .section-content h3 {
-        margin: 0;
-    }
-}
-
-#above-fold {
-    position: relative;
-}
-
-#pitch {
-    margin: 2em 0;
-    padding: $padding_heavy;
-}
-
 
 @media screen and (min-width: $screen-sm-min) {
+    #aboveFoldTeaser {
+        h2 {
+            font-size: 3.75rem;
+        }
+    }
 
     .xs-text-center {
         text-align: initial;
     }
 
-    #pitch {
-        margin: 1em 0;
-        padding: $padding-small-vertical $padding-small-horizontal 0 0;
-    }
-
-    #above-fold-main {
-        min-height: $height_above_fold;
-    }
-
-    h1 {
-        font-size: 5rem;
-    }
-
     div[class^='video-container'] {
         margin-top: 3em;
-    }
-
-    #above-fold-main {
-        // Set the background image and tell it to cover the entire div, locking the
-        // top right corner in place
-        background: url($path_img_base + '/finish-college-background.jpg');
-        background-size: cover;
-        background-position: top right;
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background-image: $gradient_right_fade_blue;
-        }
-    }
-
-    #box-title {
-        background-position: top left;
-        height: 300px;
-        width: 300px;
-        padding-bottom: initial;
-        // width: 200px;
-        margin-left: $height_section_title;
-        padding: 0;
     }
 
     // Medium and large screen devices
@@ -338,12 +411,12 @@ div[class^='video-container'] {
         }
     }
 
-    .page-section:nth-of-type(odd) .section-title {
-        background: $gradient_blue_box;
+    div[class*='page-section']:nth-of-type(odd) .section-title {
+        background: $gradient_green_box;
     }
 
-    .page-section:nth-of-type(even) .section-title {
-        background: $gradient_green_box;
+    div[class*='page-section']:nth-of-type(even) .section-title {
+        background: $gradient_blue_box;
     }
 
     .section-content {
@@ -351,14 +424,41 @@ div[class^='video-container'] {
         padding-right: $height_section_title;
     }
 
-    .overview p {
-        margin-top: 0;
-        margin-bottom: 0;
+    .section-title h2 {
+        font-size: $font_size_section_title_lg;
     }
 }
 
 @media screen and (min-width: $screen-md-min) {
-    h1 {
-        font-size: 6rem;
+    #aboveFoldBottomRow > div[class^="col-"] {
+        min-height: 300px;
+    }
+
+    #aboveFoldOnlineLearningText {
+        p {
+            margin-top: 2em;
+        }
+    }
+
+    #pageTitle {
+        text-align: left;
+    }
+
+    #aboveFoldTopRow,
+    #aboveFoldTopRow > div[class*='col-'] {
+        height: 700px;
+    }
+
+    #aboveFoldTopRow > div[class*="col-"] {
+        padding: 0;
+    }
+    #aboveFoldTeaser h2 {
+        font-size: 4.00rem;
+    }
+}
+
+@media screen and (min-width: $screen-lg-min) {
+    #aboveFoldTeaser h2 {
+        font-size: 4.25rem;
     }
 }

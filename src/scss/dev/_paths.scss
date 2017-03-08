@@ -1,2 +1,10 @@
+// @Author: Colin Osterhout <ctosterhout>
+// @Date:   2016-04-19T15:26:23-08:00
+// @Email:  ctosterhout@alaska.edu
+// @Project: BERT
+// @Last modified by:   ctosterhout
+// @Last modified time: 2016-07-27T13:21:35-08:00
+// @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
+
 // This file will be used for development environment paths
-$path_img_base: 'img';
+$path_img_base: 'img' !default;

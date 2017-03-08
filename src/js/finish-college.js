@@ -4,7 +4,7 @@
 * @Email:  ctosterhout@alaska.edu
 * @Project: BERT
 * @Last modified by:   ctosterhout
-* @Last modified time: 2016-06-29T12:51:47-08:00
+* @Last modified time: 2017-01-17T17:18:29-09:00
 * @License: Released under MIT License. Copyright 2016 University of Alaska Southeast.  For more details, see https://opensource.org/licenses/MIT
 */
 
@@ -17,7 +17,7 @@
         $(function () {
             $('.goto-request-form').click(function() {
                 // Get the target to scroll to
-                var $target = $('#request-form'), timeAnimate = 500;
+                var $target = $('#requestForm'), timeAnimate = 500;
 
                 // Begin the animation
                 $('html, body').animate({
